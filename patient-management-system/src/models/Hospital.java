@@ -9,4 +9,12 @@ public class Hospital {
         this.name = name;
         this.cities = cities;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public List<String> getCities() {
+        return cities;
+    }
 }

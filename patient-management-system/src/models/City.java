@@ -8,4 +8,12 @@ public class City {
         this.name = name;
         this.community = community;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCommunity() {
+        return community;
+    }
 }
