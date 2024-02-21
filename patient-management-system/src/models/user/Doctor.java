@@ -1,7 +1,6 @@
 package models.user;
 
 import models.Hospital;
-import models.House;
 import models.enums.DoctorType;
 import models.enums.Gender;
 import models.enums.UserType;

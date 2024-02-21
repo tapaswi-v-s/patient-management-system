@@ -1,6 +1,6 @@
 package models.user;
 
-import models.House;
+import models.Address;
 import models.enums.Gender;
 import models.enums.UserType;
 
@@ -13,10 +13,10 @@ public class Person {
     double age;
     UserType userType; // "Null" if this person is not a user of this system but just random person.
     Gender gender;
-    House house;
+    Address address;
 
     public Person(String fName, String lName, String bloodGroup, String uName, String pwd,
-                  double age, UserType userType, Gender gender, House house) {
+                  double age, UserType userType, Gender gender, Address address) {
         this.fName = fName;
         this.lName = lName;
         this.bloodGroup = bloodGroup;
@@ -25,14 +25,14 @@ public class Person {
         this.age = age;
         this.userType = userType;
         this.gender = gender;
-        this.house = house;
+        this.address = address;
     }
 
     public Person() {}
 
     public Patient convertToPatient(){
         return new Patient(fName, lName, bloodGroup, gender, "", age,
-                null, house);
+                null, address);
     }
 
     public String getfName() {
@@ -59,8 +59,8 @@ public class Person {
         return gender;
     }
 
-    public House getHouse() {
-        return house;
+    public Address getHouse() {
+        return address;
     }
 
     public void setfName(String fName) {
@@ -95,7 +95,7 @@ public class Person {
         this.gender = gender;
     }
 
-    public void setHouse(House house) {
-        this.house = house;
+    public void setHouse(Address address) {
+        this.address = address;
     }
 }
