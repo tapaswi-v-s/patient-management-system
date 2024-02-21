@@ -10,4 +10,8 @@ public class Doctor extends Person{
         this.lName = lName;
         this.age = age;
     }
+
+    public DoctorType getType() {
+        return type;
+    }
 }
