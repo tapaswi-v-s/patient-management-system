@@ -57,6 +57,7 @@ public class PersonController {
     }
 
     public boolean bookAnAppointment(Appointment appointment){
+
         return Data.getInstance().activeAppointments.add(appointment);
     }
 
