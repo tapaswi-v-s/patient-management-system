@@ -1,6 +1,6 @@
 package models.user;
 
-import models.House;
+import models.Address;
 import models.enums.Gender;
 import models.enums.VitalSign;
 
@@ -11,7 +11,7 @@ public class Patient extends Person {
     public Patient() {}
 
     public Patient(String fName, String lName, String bloodGroup, Gender gender,
-                   String note, double age, VitalSign vitalSign, House house) {
+                   String note, double age, VitalSign vitalSign, Address address) {
         this.fName = fName;
         this.lName = lName;
         this.bloodGroup = bloodGroup;
@@ -19,7 +19,7 @@ public class Patient extends Person {
         this.note = note;
         this.age = age;
         this.vitalSign = vitalSign;
-        this.house = house;
+        this.address = address;
     }
 
     public void setVitalSign(VitalSign vitalSign) {

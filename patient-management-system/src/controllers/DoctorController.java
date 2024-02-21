@@ -15,10 +15,10 @@ public class DoctorController {
     Doctor doctor;
 
 
-    // UI: 1 Page for adding appointments,
-    // 1 for available patients in a particular appointment
-    //      Display all the patient details and a UI for adding vital sign and setting a note.
-    // After examining, close this encounter and add it to history
+//     UI: 1 Page for adding appointments,
+//     1 for available patients in a particular appointment
+//          Display all the patient details and a UI for adding vital sign and setting a note.
+//     After examining, close this encounter and add it to history
 
 
 //     1 Page for navigating the patient directory
@@ -58,6 +58,7 @@ public class DoctorController {
     }
 
     public List<Patient> getMyPatients(){
+        //TODO:  Add logic to filter out doctor's patient
         return Data.getInstance().patients;
     }
 
@@ -67,7 +68,7 @@ public class DoctorController {
         patient.setNote(note);
     }
 
-    public boolean updateMyRecordInDirectory(Doctor doctor){
+    /*public boolean updateMyRecordInDirectory(Doctor doctor){
         for (Doctor d: Data.getInstance().doctors) {
             if(d == this.doctor){
                 d = doctor;
@@ -75,7 +76,7 @@ public class DoctorController {
             }
         }
         return false;
-    }
+    }*/
 
 
 }
