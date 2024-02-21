@@ -46,11 +46,11 @@ public class PatientController {
     public boolean bookAppointment(Doctor doctor, Date date, String timeSlot, Hospital hospital){
         // Adding new appointment to the database
         Data.getInstance().activeAppointments
-                .add(new Appointment(doctor, patient, date, timeSlot, hospital));
+                .add(new Appointment(doctor, patient, date, timeSlot,"", hospital));
         return true;
     }
 
-    public List<Appointment> getAppointments(){
+    public List<Appointment> getMyAppointments(){
         List<Appointment> apts = new ArrayList<>();
         for (Appointment apt : Data.getInstance().activeAppointments) {
             if(apt.getPatient() == this.patient)
