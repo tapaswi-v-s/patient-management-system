@@ -1,6 +1,7 @@
 package utils;
 
 import models.*;
+import models.enums.DoctorType;
 import models.enums.Gender;
 import models.enums.UserType;
 import models.enums.VitalSign;
@@ -24,7 +25,7 @@ public class Data {
         return single_instance;
     }
 
-    static List<Patient> patients = new ArrayList<>(){{
+    public List<Patient> patients = new ArrayList<>(){{
         add(new Patient("Dimitri", "Peres", "A-",
                 Gender.MALE, "", 24, VitalSign.BLOOD_OXYGEN, null));
         add(new Patient("Sam", "Bahadur", "B-",
@@ -41,15 +42,17 @@ public class Data {
         add(new Hospital("Apollo", List.of("Ahmedabad, Baroda")));
     }};
 
-    List<Person> people = new ArrayList<>(){{
-        add(new Person("Tapaswi", "Satyapanthi", "A+", 26, UserType.ADMIN, Gender.MALE, null));
+    public List<Person> people = new ArrayList<>(){{
+        add(new Person("Tapaswi", "Satyapanthi", "A+", "tapaswi","pwd",
+                26, UserType.ADMIN, Gender.MALE, null));
     }};
 
     public List<Doctor> doctors = new ArrayList<>(){{
-        add(new Doctor("Tarak", "Mehta", 41));
+        add(new Doctor("Tarak", "Mehta", "A+", "tarak","pwd",34,
+                Gender.MALE, DoctorType.CARDIOLOGIST, hospitals.get(0)));
     }};
 
-    List<Encounter> encounters = new ArrayList<>(){{
+    public List<Encounter> encounters = new ArrayList<>(){{
 
     }};
 
@@ -57,7 +60,7 @@ public class Data {
 
     }};
 
-    List<Appointment> pastAppointments = new ArrayList<>(){{
+    public List<Appointment> pastAppointments = new ArrayList<>(){{
 
     }};
 
