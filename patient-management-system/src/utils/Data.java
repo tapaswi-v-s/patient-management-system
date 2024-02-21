@@ -2,7 +2,7 @@ package utils;
 
 import models.*;
 import models.enums.Gender;
-import models.enums.Role;
+import models.enums.UserType;
 import models.enums.VitalSign;
 import models.user.Doctor;
 import models.user.Patient;
@@ -13,32 +13,51 @@ import java.util.List;
 
 public class Data {
 
+    private static Data single_instance = null;
+
+    public Data() {}
+
+    public static synchronized Data getInstance(){
+        if (single_instance == null)
+            single_instance = new Data();
+
+        return single_instance;
+    }
+
     static List<Patient> patients = new ArrayList<>(){{
         add(new Patient("Dimitri", "Peres", "A-",
-                Gender.MALE, "", 24, VitalSign.BLOOD_OXYGEN));
+                Gender.MALE, "", 24, VitalSign.BLOOD_OXYGEN, null));
         add(new Patient("Sam", "Bahadur", "B-",
-                Gender.MALE, "", 33, null));
+                Gender.MALE, "", 33, null, null));
         add(new Patient("Vicky", "Kaushal", "O+",
-                Gender.MALE, "", 28, VitalSign.BODY_TEMPERATURE));
+                Gender.MALE, "", 28, VitalSign.BODY_TEMPERATURE, null));
         add(new Patient("Katrina", "Kaushal", "A+",
-                Gender.FEMALE, "", 36, VitalSign.HEART_RATE));
+                Gender.FEMALE, "", 36, VitalSign.HEART_RATE, null));
         add(new Patient("Rajesh", "Patel", "B-",
-                Gender.MALE, "", 82, null));
+                Gender.MALE, "", 82, null, null));
     }};
 
-    static List<Hospital> hospitals = new ArrayList<>(){{
+    public List<Hospital> hospitals = new ArrayList<>(){{
         add(new Hospital("Apollo", List.of("Ahmedabad, Baroda")));
     }};
 
-    static List<Person> people = new ArrayList<>(){{
-        add(new Person("Tapaswi", "Satyapanthi", "A+", 26, Role.ADMIN, Gender.MALE));
+    List<Person> people = new ArrayList<>(){{
+        add(new Person("Tapaswi", "Satyapanthi", "A+", 26, UserType.ADMIN, Gender.MALE, null));
     }};
 
-    static List<Doctor> doctors = new ArrayList<>(){{
+    public List<Doctor> doctors = new ArrayList<>(){{
         add(new Doctor("Tarak", "Mehta", 41));
     }};
 
-    static List<Encounter> encounters = new ArrayList<>(){{
+    List<Encounter> encounters = new ArrayList<>(){{
+
+    }};
+
+    public List<Appointment> activeAppointments = new ArrayList<>(){{
+
+    }};
+
+    List<Appointment> pastAppointments = new ArrayList<>(){{
 
     }};
 
