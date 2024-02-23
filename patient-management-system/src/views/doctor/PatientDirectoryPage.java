@@ -4,6 +4,15 @@
  */
 package views.doctor;
 
+import controllers.DoctorController;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JPanel;
+import models.Appointment;
+import models.user.Patient;
+import utils.Utils;
+
 /**
  *
  * @author HP
@@ -13,8 +22,23 @@ public class PatientDirectoryPage extends javax.swing.JPanel {
     /**
      * Creates new form PatientDirectoryPage
      */
-    public PatientDirectoryPage() {
+    JPanel bottomPanel;
+    DoctorController doctorController;
+    List<Patient> patients;
+    public PatientDirectoryPage(JPanel bottomPanel, DoctorController doctorController) {
+        this.bottomPanel = bottomPanel;
+        this.doctorController = doctorController;
         initComponents();
+        populateFields();
+    }
+    
+    void populateFields(){
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        patients = doctorController.getAllPatients();
+        listModel.addAll(patients.stream()
+                .map(p -> p.getfName()+" "+p.getlName() + " Age: "+p.getAge() 
+                        + " Blood Group: "+p.getBloodGroup()).toList());
+        lstPatients.setModel(listModel);
     }
 
     /**
@@ -27,18 +51,34 @@ public class PatientDirectoryPage extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        lstPatients = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+        lstPatients.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstPatients);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Patient Directory");
+
+        btnBack.setText("← Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,24 +86,54 @@ public class PatientDirectoryPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(226, Short.MAX_VALUE)
+                .addGap(42, 42, 42)
+                .addComponent(btnBack)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(239, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(264, 264, 264)
+                .addComponent(btnSubmit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnBack))
+                .addGap(39, 39, 39)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSubmit)
+                .addGap(109, 109, 109))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        bottomPanel.remove(this);
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.previous(bottomPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        if(lstPatients.getSelectedIndex() < 0){
+            Utils.showDialog(this, null, "Please Select the Appointment!");
+        }else{
+            Patient patient = patients.get(lstPatients.getSelectedIndex());
+            bottomPanel.add(new PatientDetailsPage(bottomPanel, doctorController, patient));
+            CardLayout cl = (CardLayout) bottomPanel.getLayout();
+            cl.next(bottomPanel);
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> lstPatients;
     // End of variables declaration//GEN-END:variables
 }
