@@ -68,6 +68,8 @@ public class ListAppointmentPage extends javax.swing.JPanel {
         btnViewActive = new javax.swing.JButton();
         btnViewPast = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
         lstActiveAppointments.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -81,6 +83,7 @@ public class ListAppointmentPage extends javax.swing.JPanel {
         jScrollPane6.setViewportView(lstActiveAppointments);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Active Appointments");
 
         lstPastAppointments.setModel(new javax.swing.AbstractListModel<String>() {
@@ -91,6 +94,7 @@ public class ListAppointmentPage extends javax.swing.JPanel {
         jScrollPane7.setViewportView(lstPastAppointments);
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Past Appointments");
 
         btnBack.setText("← Back");
