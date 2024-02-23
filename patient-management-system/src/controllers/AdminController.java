@@ -21,24 +21,21 @@ public class AdminController {
     }
 
     /// ================ GET =================
-    List<Hospital> getAllHospitals(){
+    public List<Hospital> getAllHospitals(){
         return data.hospitals;
     }
 
-    List<Doctor> getAllDoctors(){
+    public List<Doctor> getAllDoctors(){
         return data.doctors;
     }
 
-    List<Patient> getAllPatients(){
+    public List<Patient> getAllPatients(){
         return data.patients;
     }
 
-    List<Appointment> getAllActiveAppointments(){
+    public List<Appointment> getAllAppointments(){
+        data.activeAppointments.addAll(data.pastAppointments);
         return data.activeAppointments;
-    }
-
-    List<Appointment> getAllPastAppointments(){
-        return data.pastAppointments;
     }
     /// ======================================
 
@@ -124,8 +121,15 @@ public class AdminController {
         return data.patients.remove(patient);
     }
 
-    public boolean deleteActiveAppointment(Appointment appointment){
-        return data.activeAppointments.remove(appointment);
+    public boolean deleteAppointment(Appointment appointment){
+        boolean value = false;
+        value = data.activeAppointments.remove(appointment);
+        if(value)
+            return value;
+        else{
+            value = data.pastAppointments.remove(appointment);
+        }
+        return value;
     }
 
     public boolean clearAllPastAppointment(){
