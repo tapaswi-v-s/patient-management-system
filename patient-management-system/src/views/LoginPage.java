@@ -4,6 +4,24 @@
  */
 package views;
 
+import controllers.AdminController;
+import controllers.DoctorController;
+import controllers.LoginController;
+import controllers.PatientController;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JPanel;
+import models.enums.UserType;
+import models.user.Doctor;
+import utils.StringUtils;
+import javax.swing.*;
+import models.user.Patient;
+import models.user.Person;
+import utils.Utils;
+import views.admin.AdminHomePage;
+import views.doctor.DoctorHomePage;
+import views.patient.PatientHomePage;
+
 /**
  *
  * @author kushp
@@ -13,8 +31,22 @@ public class LoginPage extends javax.swing.JPanel {
     /**
      * Creates new form LoginPage
      */
-    public LoginPage() {
+    JPanel bottomPanel;
+    LoginController loginController;
+    List<UserType> userTypes;
+    public LoginPage(JPanel bottomPanel, LoginController loginController) {
+        this.bottomPanel = bottomPanel;
+        this.loginController = loginController;
         initComponents();
+        populateFields();
+    }
+    
+    void populateFields(){
+        userTypes = StringUtils.getUserTypes();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addAll(userTypes.stream().map(Enum::name).toList());
+        drpUserType.setModel(model);
+        drpUserType.setSelectedIndex((drpUserType.getItemCount() > 0) ? 0 : -1);
     }
 
     /**
@@ -31,12 +63,14 @@ public class LoginPage extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        drpUserType = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        btnLogin = new javax.swing.JButton();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Username :");
 
+        txtUsername.setText("tapaswi");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -46,6 +80,7 @@ public class LoginPage extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Password :");
 
+        txtPassword.setText("pwd");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);
@@ -55,11 +90,22 @@ public class LoginPage extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("User Type :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Patient", "Doctor", "Admin" }));
+        drpUserType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                drpUserTypeActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Login");
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,12 +121,16 @@ public class LoginPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtUsername)
                     .addComponent(txtPassword)
-                    .addComponent(jComboBox1, 0, 154, Short.MAX_VALUE))
+                    .addComponent(drpUserType, 0, 154, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(228, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(219, 219, 219)
+                .addComponent(btnLogin)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,22 +148,72 @@ public class LoginPage extends javax.swing.JPanel {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(173, Short.MAX_VALUE))
+                    .addComponent(drpUserType, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(50, 50, 50)
+                .addComponent(btnLogin)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        
+        Person person = loginController.handleLogin(
+                txtUsername.getText(),
+                txtPassword.getText(),
+                userTypes.get(drpUserType.getSelectedIndex())
+                );
+        if(person != null){
+            switch(userTypes.get(drpUserType.getSelectedIndex())){
+                case ADMIN:
+                    bottomPanel.removeAll();
+                    bottomPanel.add(new AdminHomePage(
+                            bottomPanel,
+                            new AdminController(person)));
+                    CardLayout clAdmin = (CardLayout) bottomPanel.getLayout();
+                    clAdmin.next(bottomPanel);
+                    break;
+                case PATIENT:
+                    bottomPanel.removeAll();
+                    bottomPanel.add(new PatientHomePage(
+                            bottomPanel,
+                            new PatientController((Patient)person)));
+                    CardLayout clPatient = (CardLayout) bottomPanel.getLayout();
+                    clPatient.next(bottomPanel);
+                    break;
+                case DOCTOR:
+                    bottomPanel.removeAll();
+                    bottomPanel.add(new DoctorHomePage(
+                            bottomPanel,
+                            new DoctorController((Doctor)person)));
+                    CardLayout clDoctor = (CardLayout) bottomPanel.getLayout();
+                    clDoctor.next(bottomPanel);
+                    break;
+                default:
+                    Utils.showDialog(this, null,
+                            "Selected User Type is not yet supported...");
+                    break;
+            }
+        }else{
+            Utils.showDialog(this, null, "Please enter correct credentials...");
+        }
+    }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void drpUserTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drpUserTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_drpUserTypeActionPerformed
+
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUsernameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btnLogin;
+    private javax.swing.JComboBox<String> drpUserType;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

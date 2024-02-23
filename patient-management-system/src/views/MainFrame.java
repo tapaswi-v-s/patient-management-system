@@ -4,6 +4,8 @@
  */
 package views;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author kushp
@@ -13,10 +15,11 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    FirstScreen firstScreen = new FirstScreen();
     public MainFrame() {
         initComponents();
-        
+        this.setLocationRelativeTo(null);
+        FirstScreen firstScreen = new FirstScreen(bottomPanel);
+        bottomPanel.add(firstScreen);
     }
 
     /**
@@ -60,7 +63,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSplitPane2.setTopComponent(jPanel3);
 
-        bottomPanel.setPreferredSize(new java.awt.Dimension(550, 400));
+        bottomPanel.setPreferredSize(new java.awt.Dimension(550, 450));
         bottomPanel.setLayout(new java.awt.CardLayout());
         jSplitPane2.setRightComponent(bottomPanel);
 

@@ -4,6 +4,14 @@
  */
 package views;
 
+import controllers.LoginController;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+
+import controllers.PersonController;
+import models.user.Person;
+import views.person.BrowsePage;
+
 /**
  *
  * @author kushp
@@ -13,7 +21,9 @@ public class FirstScreen extends javax.swing.JPanel {
     /**
      * Creates new form FirstScreen
      */
-    public FirstScreen() {
+    JPanel bottomPanel;
+    public FirstScreen(JPanel bottomPanel) {
+        this.bottomPanel = bottomPanel;
         initComponents();
     }
 
@@ -37,32 +47,46 @@ public class FirstScreen extends javax.swing.JPanel {
         });
 
         btnBrowse.setText("Browse");
+        btnBrowse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBrowseActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBrowse, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
-                .addGap(203, 203, 203))
+                    .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
+                .addGap(137, 137, 137)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
                 .addComponent(btnBrowse, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addContainerGap(181, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+
+        bottomPanel.add(new LoginPage(bottomPanel, new LoginController()));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnBrowseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBrowseActionPerformed
+        bottomPanel.add(new BrowsePage(bottomPanel, new PersonController(new Person())));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
+    }//GEN-LAST:event_btnBrowseActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
