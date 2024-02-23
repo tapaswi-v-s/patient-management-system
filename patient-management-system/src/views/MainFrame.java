@@ -40,7 +40,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
 
+        jPanel3.setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient Management System");
 
@@ -63,6 +67,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSplitPane2.setTopComponent(jPanel3);
 
+        bottomPanel.setBackground(new java.awt.Color(0, 51, 102));
         bottomPanel.setPreferredSize(new java.awt.Dimension(550, 450));
         bottomPanel.setLayout(new java.awt.CardLayout());
         jSplitPane2.setRightComponent(bottomPanel);

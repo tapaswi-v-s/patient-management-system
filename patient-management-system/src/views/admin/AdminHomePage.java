@@ -44,7 +44,11 @@ public class AdminHomePage extends javax.swing.JPanel {
         btnAppointment = new javax.swing.JButton();
         btnLogOut = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+        setForeground(new java.awt.Color(255, 255, 255));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Admin Homepage");
 
         btnHospital.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

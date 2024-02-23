@@ -70,10 +70,17 @@ public class RegistrationPage extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         txtCity = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+        setForeground(new java.awt.Color(255, 255, 255));
+
+        jLabel1.setBackground(new java.awt.Color(0, 51, 102));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Registration Page");
 
+        jLabel2.setBackground(new java.awt.Color(0, 51, 102));
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("First Name");
 
         btnBack.setText("← Back");
@@ -83,19 +90,29 @@ public class RegistrationPage extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setBackground(new java.awt.Color(0, 51, 102));
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Last Name");
 
+        jLabel4.setBackground(new java.awt.Color(0, 51, 102));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Blood Group");
 
+        Age.setBackground(new java.awt.Color(0, 51, 102));
         Age.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Age.setForeground(new java.awt.Color(255, 255, 255));
         Age.setText("Age");
 
+        Age1.setBackground(new java.awt.Color(0, 51, 102));
         Age1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Age1.setForeground(new java.awt.Color(255, 255, 255));
         Age1.setText("User Name");
 
+        Age2.setBackground(new java.awt.Color(0, 51, 102));
         Age2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Age2.setForeground(new java.awt.Color(255, 255, 255));
         Age2.setText("Password");
 
         btnRegister.setText("Register");
@@ -105,18 +122,26 @@ public class RegistrationPage extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setBackground(new java.awt.Color(0, 51, 102));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Gender");
 
         drpGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MALE", "FEMALE", "PREFER_NOT_TO_SAY" }));
 
+        jLabel6.setBackground(new java.awt.Color(0, 51, 102));
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("House Name");
 
+        jLabel7.setBackground(new java.awt.Color(0, 51, 102));
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Community");
 
+        jLabel8.setBackground(new java.awt.Color(0, 51, 102));
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("City");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

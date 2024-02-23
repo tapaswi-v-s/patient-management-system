@@ -39,6 +39,8 @@ public class FirstScreen extends javax.swing.JPanel {
         btnLogin = new javax.swing.JToggleButton();
         btnBrowse = new javax.swing.JToggleButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
