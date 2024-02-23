@@ -62,6 +62,10 @@ public class Data {
     public List<Person> people = new ArrayList<>(){{
         add(new Person("Tapaswi", "Satyapanthi", "A+", "tapaswi","pwd",
                 26, UserType.ADMIN, Gender.MALE, new Address("40 McCowan Rd", new City("Toronto", "GTA"))));
+        add(new Person("Rachita", "Shah", "B+", "rachita","shah",
+                26, UserType.ADMIN, Gender.FEMALE, new Address("40 McCowan Rd", new City("Toronto", "GTA"))));
+        add(new Person("Kush", "Parmar", "o-", "kush","parmar",
+                26, UserType.ADMIN, Gender.MALE, new Address("40 McCowan Rd", new City("Toronto", "GTA"))));
     }};
 
     public List<Doctor> doctors = new ArrayList<>(){{

@@ -46,6 +46,7 @@ public class DoctorAvailabilityPage extends javax.swing.JPanel {
         drpEndTime = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        txtDate = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(0, 51, 102));
 
@@ -106,7 +107,8 @@ public class DoctorAvailabilityPage extends javax.swing.JPanel {
                         .addGap(49, 49, 49)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(drpStartTime, 0, 147, Short.MAX_VALUE)
-                            .addComponent(drpEndTime, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(drpEndTime, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(207, 207, 207)
                         .addComponent(btnAdd)))
@@ -120,7 +122,9 @@ public class DoctorAvailabilityPage extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(btnBack))
                 .addGap(32, 32, 32)
-                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(drpStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,5 +167,6 @@ public class DoctorAvailabilityPage extends javax.swing.JPanel {
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblEndTime;
     private javax.swing.JLabel lblStartTime;
+    private com.toedter.calendar.JDateChooser txtDate;
     // End of variables declaration//GEN-END:variables
 }

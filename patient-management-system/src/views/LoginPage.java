@@ -46,7 +46,7 @@ public class LoginPage extends javax.swing.JPanel {
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         model.addAll(userTypes.stream().map(Enum::name).toList());
         drpUserType.setModel(model);
-        drpUserType.setSelectedIndex((drpUserType.getItemCount() > 0) ? 0 : -1);
+        drpUserType.setSelectedIndex((drpUserType.getItemCount() > 0) ? 3 : -1);
     }
 
     /**
@@ -73,7 +73,6 @@ public class LoginPage extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Username :");
 
-        txtUsername.setText("tapaswi");
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtUsernameActionPerformed(evt);
@@ -84,7 +83,6 @@ public class LoginPage extends javax.swing.JPanel {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Password :");
 
-        txtPassword.setText("pwd");
         txtPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPasswordActionPerformed(evt);

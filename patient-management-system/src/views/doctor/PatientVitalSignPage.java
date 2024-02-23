@@ -118,16 +118,22 @@ public class PatientVitalSignPage extends javax.swing.JPanel {
             }
         });
 
+        lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setText("jLabel9");
 
+        lblLastName.setForeground(new java.awt.Color(255, 255, 255));
         lblLastName.setText("jLabel10");
 
+        lblBloodGroup.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodGroup.setText("jLabel11");
 
+        lblGender.setForeground(new java.awt.Color(255, 255, 255));
         lblGender.setText("jLabel12");
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("jLabel13");
 
+        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblAddress.setText("jLabel14");
 
         btnSubmit.setText("Submit");
