@@ -40,6 +40,7 @@ public class DoctorHomePage extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnHomePage = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
         setPreferredSize(new java.awt.Dimension(554, 450));
 
         btnAddavailabilty.setText("Add Availabilty");
@@ -65,6 +66,7 @@ public class DoctorHomePage extends javax.swing.JPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Doctor Home Page");
 
         btnHomePage.setText("Log Out");
