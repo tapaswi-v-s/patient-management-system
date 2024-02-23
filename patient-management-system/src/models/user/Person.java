@@ -31,7 +31,7 @@ public class Person {
     public Person() {}
 
     public Patient convertToPatient(){
-        return new Patient(fName, lName, bloodGroup, gender, "", age,
+        return new Patient(fName, lName, bloodGroup, gender,userName, password, "", age,
                 null, address);
     }
 
@@ -57,6 +57,18 @@ public class Person {
 
     public Gender getGender() {
         return gender;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 
     public Address getHouse() {
@@ -95,7 +107,7 @@ public class Person {
         this.gender = gender;
     }
 
-    public void setHouse(Address address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 }

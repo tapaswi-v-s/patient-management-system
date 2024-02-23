@@ -1,5 +1,6 @@
 package models.user;
 
+import models.Address;
 import models.Hospital;
 import models.enums.DoctorType;
 import models.enums.Gender;
@@ -11,8 +12,8 @@ public class Doctor extends Person{
     Hospital hospital;
 
     public Doctor(String fName, String lName, String bloodGroup, String uName, String pwd,
-                  double age, Gender gender, DoctorType type, Hospital hospital) {
-        super(fName, lName, bloodGroup, uName, pwd, age, UserType.DOCTOR, gender, null);
+                  double age, Gender gender, DoctorType type, Hospital hospital, Address address) {
+        super(fName, lName, bloodGroup, uName, pwd, age, UserType.DOCTOR, gender, address);
         this.type = type;
         this.hospital = hospital;
     }
@@ -24,5 +25,13 @@ public class Doctor extends Person{
 
     public Hospital getHospital() {
         return hospital;
+    }
+
+    public void setType(DoctorType type) {
+        this.type = type;
+    }
+
+    public void setHospital(Hospital hospital) {
+        this.hospital = hospital;
     }
 }
