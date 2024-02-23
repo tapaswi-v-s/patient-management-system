@@ -4,17 +4,41 @@
  */
 package views.patient;
 
+import controllers.PatientController;
+import models.Appointment;
+import utils.Utils;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.SimpleDateFormat;
+
 /**
  *
  * @author kushp
  */
-public class EditAppointmentPage extends javax.swing.JPanel {
+public class AppointmentDetailsPage extends javax.swing.JPanel {
 
-    /**
-     * Creates new form EditAppointmentPage
-     */
-    public EditAppointmentPage() {
+    JPanel bottomPanel;
+    PatientController patientController;
+    Appointment appointment;
+    boolean isActive;
+    public AppointmentDetailsPage(JPanel bottomPanel, Appointment appointment,
+                                  PatientController patientController,
+                                  boolean isActive) {
+        this.bottomPanel = bottomPanel;
+        this.appointment = appointment;
+        this.patientController = patientController;
+        this.isActive = isActive;
         initComponents();
+        populateFields();
+    }
+    
+    void populateFields(){
+        txtHospital.setText(appointment.getHospital().getName());
+        txtDoctorCategory.setText(appointment.getDoctor().getType().name());
+        txtDoctor.setText(appointment.getDoctor().getfName()+" "+appointment.getDoctor().getlName());
+        txtDate.setText(new SimpleDateFormat("dd-MMM-yyyy").format(appointment.getDate()));
+        txtTime.setText(appointment.getTimeSlot());
     }
 
     /**
@@ -31,7 +55,6 @@ public class EditAppointmentPage extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        btnEditRecord = new javax.swing.JButton();
         txtHospital = new javax.swing.JTextField();
         txtDoctorCategory = new javax.swing.JTextField();
         txtDoctor = new javax.swing.JTextField();
@@ -39,6 +62,7 @@ public class EditAppointmentPage extends javax.swing.JPanel {
         txtTime = new javax.swing.JTextField();
         btnCancelAppointment = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Doctor :");
@@ -54,27 +78,15 @@ public class EditAppointmentPage extends javax.swing.JPanel {
 
         jLabel2.setText("Doctor Category :");
 
-        btnEditRecord.setText("Edit Record");
-        btnEditRecord.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditRecordActionPerformed(evt);
-            }
-        });
+        txtHospital.setEditable(false);
 
-        txtHospital.setText("jTextField1");
-        txtHospital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHospitalActionPerformed(evt);
-            }
-        });
+        txtDoctorCategory.setEditable(false);
 
-        txtDoctorCategory.setText("jTextField2");
+        txtDoctor.setEditable(false);
 
-        txtDoctor.setText("jTextField3");
+        txtDate.setEditable(false);
 
-        txtDate.setText("jTextField4");
-
-        txtTime.setText("jTextField5");
+        txtTime.setEditable(false);
 
         btnCancelAppointment.setText("Cancel Appointment");
         btnCancelAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -85,7 +97,14 @@ public class EditAppointmentPage extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Edit Appointment");
+        jLabel6.setText("Appointment Details");
+
+        btnBack.setText("← Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -93,39 +112,42 @@ public class EditAppointmentPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(66, 66, 66)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDate)
-                    .addComponent(txtTime)
-                    .addComponent(txtDoctorCategory)
-                    .addComponent(txtDoctor)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(148, 148, 148))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(btnEditRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(btnCancelAppointment))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(92, 92, 92)
+                                .addComponent(btnCancelAppointment)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDate)
+                            .addComponent(txtTime)
+                            .addComponent(txtDoctorCategory)
+                            .addComponent(txtDoctor)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtHospital, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(148, 148, 148))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,30 +168,34 @@ public class EditAppointmentPage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditRecord)
-                    .addComponent(btnCancelAppointment))
-                .addGap(37, 37, 37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                .addComponent(btnCancelAppointment)
+                .addGap(31, 31, 31))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRecordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditRecordActionPerformed
-
-    private void txtHospitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHospitalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHospitalActionPerformed
-
     private void btnCancelAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelAppointmentActionPerformed
-        // TODO add your handling code here:
+        if(isActive){
+            if(patientController.cancelAppointment(appointment)){
+                Utils.showDialog(this, "Appointment Cancelled...", null);
+            }else{
+                Utils.showDialog(this, null, "Something Went Wrong :(");
+            }
+        }else{
+            Utils.showDialog(this, null, "Something Went Wrong :(");
+        }
     }//GEN-LAST:event_btnCancelAppointmentActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        bottomPanel.remove(this);
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.previous(bottomPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCancelAppointment;
-    private javax.swing.JButton btnEditRecord;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
