@@ -56,13 +56,15 @@ public class DoctorAppointmentsScreen extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPatients = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        txtDate = new com.toedter.calendar.JDateChooser();
         btnBack = new javax.swing.JButton();
         btnSelect = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+        setForeground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(553, 450));
 
         lblDate.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lblDate.setForeground(new java.awt.Color(255, 255, 255));
         lblDate.setText("Date:");
 
         lstPatients.setModel(new javax.swing.AbstractListModel<String>() {
@@ -73,13 +75,8 @@ public class DoctorAppointmentsScreen extends javax.swing.JPanel {
         jScrollPane1.setViewportView(lstPatients);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Appointments");
-
-        txtDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtDatePropertyChange(evt);
-            }
-        });
 
         btnBack.setText("← Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -112,13 +109,11 @@ public class DoctorAppointmentsScreen extends javax.swing.JPanel {
                                 .addGap(31, 31, 31)
                                 .addComponent(btnBack)
                                 .addGap(112, 112, 112)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addComponent(btnSelect)))
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,14 +123,12 @@ public class DoctorAppointmentsScreen extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(btnBack))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnSelect)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -172,6 +165,5 @@ public class DoctorAppointmentsScreen extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JList<String> lstPatients;
-    private com.toedter.calendar.JDateChooser txtDate;
     // End of variables declaration//GEN-END:variables
 }

@@ -56,6 +56,8 @@ public class PatientDirectoryPage extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
         lstPatients.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -64,6 +66,7 @@ public class PatientDirectoryPage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(lstPatients);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Patient Directory");
 
         btnBack.setText("← Back");
