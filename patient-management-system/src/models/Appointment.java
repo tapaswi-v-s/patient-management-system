@@ -47,4 +47,17 @@ public class Appointment {
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public void setTimeSlot(String timeSlot) {
+        this.timeSlot = timeSlot;
+    }
 }
+

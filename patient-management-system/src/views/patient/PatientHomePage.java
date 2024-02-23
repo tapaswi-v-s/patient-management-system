@@ -4,6 +4,13 @@
  */
 package views.patient;
 
+import controllers.LoginController;
+import controllers.PatientController;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import models.user.Patient;
+import views.LoginPage;
+
 /**
  *
  * @author kushp
@@ -13,7 +20,11 @@ public class PatientHomePage extends javax.swing.JPanel {
     /**
      * Creates new form PatientView
      */
-    public PatientHomePage() {
+    JPanel bottomPanel;
+    PatientController patientController;
+    public PatientHomePage(JPanel bottomPanel, PatientController patientController) {
+        this.bottomPanel = bottomPanel;
+        this.patientController = patientController;
         initComponents();
     }
 
@@ -28,7 +39,9 @@ public class PatientHomePage extends javax.swing.JPanel {
 
         btnMakeAppointment = new javax.swing.JButton();
         btnViewAppointments = new javax.swing.JButton();
-        btnEditRecord = new javax.swing.JButton();
+        btnViewRecord = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnHomePage = new javax.swing.JButton();
 
         btnMakeAppointment.setText("Make Appointment");
         btnMakeAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -44,10 +57,20 @@ public class PatientHomePage extends javax.swing.JPanel {
             }
         });
 
-        btnEditRecord.setText("Edit Record");
-        btnEditRecord.addActionListener(new java.awt.event.ActionListener() {
+        btnViewRecord.setText("View My Record");
+        btnViewRecord.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditRecordActionPerformed(evt);
+                btnViewRecordActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Patient Home Page");
+
+        btnHomePage.setText("Log Out");
+        btnHomePage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHomePageActionPerformed(evt);
             }
         });
 
@@ -57,42 +80,65 @@ public class PatientHomePage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(202, 202, 202)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnEditRecord, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addComponent(btnHomePage))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btnViewRecord, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                         .addComponent(btnViewAppointments, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                         .addComponent(btnMakeAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btnHomePage))
+                .addGap(35, 35, 35)
                 .addComponent(btnMakeAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(btnViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
-                .addComponent(btnEditRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addComponent(btnViewRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(157, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMakeAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMakeAppointmentActionPerformed
-        // TODO add your handling code here:
+        bottomPanel.add(new PatientAppointmentPage(bottomPanel, patientController));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
     }//GEN-LAST:event_btnMakeAppointmentActionPerformed
 
     private void btnViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointmentsActionPerformed
-        // TODO add your handling code here:
+        bottomPanel.add(new ListAppointmentPage(bottomPanel, patientController));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
     }//GEN-LAST:event_btnViewAppointmentsActionPerformed
 
-    private void btnEditRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditRecordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEditRecordActionPerformed
+    private void btnViewRecordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewRecordActionPerformed
+        bottomPanel.add(new ViewMyDetailsPage(bottomPanel, patientController.getPatient()));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
+    }//GEN-LAST:event_btnViewRecordActionPerformed
+
+    private void btnHomePageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomePageActionPerformed
+        bottomPanel.removeAll();
+        bottomPanel.add(new LoginPage(bottomPanel, new LoginController()));
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.next(bottomPanel);
+    }//GEN-LAST:event_btnHomePageActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditRecord;
+    private javax.swing.JButton btnHomePage;
     private javax.swing.JButton btnMakeAppointment;
     private javax.swing.JButton btnViewAppointments;
+    private javax.swing.JButton btnViewRecord;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

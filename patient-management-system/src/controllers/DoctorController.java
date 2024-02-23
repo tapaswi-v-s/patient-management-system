@@ -6,6 +6,7 @@ import models.enums.VitalSign;
 import models.user.Doctor;
 import models.user.Patient;
 import utils.Data;
+import utils.Utils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,6 +14,7 @@ import java.util.List;
 
 public class DoctorController {
     Doctor doctor;
+    Data data = Data.getInstance();
 
 
 //     UI: 1 Page for adding appointments,
@@ -29,47 +31,52 @@ public class DoctorController {
         this.doctor = doctor;
     }
 
-    public void  addAppointments(Date date, String startTime, String endTime){
+    public boolean  addAppointments(Date date, String startTime, String endTime){
         String timeSlot = startTime+" - "+endTime;
-        Data.getInstance().activeAppointments.add(
+        return data.activeAppointments.add(
                 new Appointment(doctor, null, date, timeSlot, null,
                         doctor.getHospital()));
     }
-    public List<Appointment> getAllAppointments(Date date){
+    public List<Appointment> getMyAppointments(Date date){
         List<Appointment> list = new ArrayList<>();
-        for (Appointment apt : Data.getInstance().activeAppointments) {
+        for (Appointment apt : data.activeAppointments) {
             // Logic to check this doctor's appointments who "has" a patient
-            if(apt.getDoctor() == this.doctor && apt.getPatient() != null){
+            if(apt.getDoctor() == this.doctor
+                    && apt.getPatient() != null
+                    && Utils.sdf.format(apt.getDate()).equals(Utils.sdf.format(date))){
                 list.add(apt);
             }
         }
         return list;
     }
 
-    public void examinePatient(VitalSign vitalSign, String note, Appointment appointment){
+    public boolean examinePatient(VitalSign vitalSign, String note, Appointment appointment){
+        boolean value = false;
         appointment.getPatient().setVitalSign(vitalSign);
         appointment.getPatient().setNote(note);
-        Data.getInstance().encounters
+        appointment.setNote(note);
+        value = data.encounters
                 .add(new Encounter(doctor, appointment.getPatient(), appointment));
 
         // Removing this appointment from active and adding it to past appointments
-        Data.getInstance().activeAppointments.remove(appointment);
-        Data.getInstance().pastAppointments.add(appointment);
+        value = data.activeAppointments.remove(appointment);
+        value = data.pastAppointments.add(appointment);
+        return value;
     }
 
-    public List<Patient> getMyPatients(){
-        //TODO:  Add logic to filter out doctor's patient
-        return Data.getInstance().patients;
+    public List<Patient> getAllPatients(){
+        return data.patients;
     }
 
     // This method will be called after examining a patient
     public void addPatientVitalSign(Patient patient, VitalSign vitalSign, String note){
         patient.setVitalSign(vitalSign);
         patient.setNote(note);
+        
     }
 
     /*public boolean updateMyRecordInDirectory(Doctor doctor){
-        for (Doctor d: Data.getInstance().doctors) {
+        for (Doctor d: data.doctors) {
             if(d == this.doctor){
                 d = doctor;
                 return true;

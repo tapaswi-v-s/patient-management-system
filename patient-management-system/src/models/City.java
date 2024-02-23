@@ -16,4 +16,9 @@ public class City {
     public String getCommunity() {
         return community;
     }
+
+    @Override
+    public String toString() {
+        return "Community: " + community +  ", " + "City: "+ name;
+    }
 }

@@ -4,17 +4,49 @@
  */
 package views.patient;
 
+import controllers.PatientController;
+import models.Appointment;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import utils.Utils;
+
 /**
  *
  * @author kushp
  */
 public class ListAppointmentPage extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ListAppointmentPage
-     */
-    public ListAppointmentPage() {
+    JPanel bottomPanel;
+    PatientController patientController;
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MMM-yyyy");
+
+    List<Appointment> active;
+    List<Appointment> past;
+    public ListAppointmentPage(JPanel bottomPanel, PatientController patientController) {
+        this.bottomPanel = bottomPanel;
+        this.patientController = patientController;
         initComponents();
+        populateFields();
+    }
+
+    void populateFields(){
+        // Populating active appointments
+        DefaultListModel<String> listModel = new DefaultListModel<>();
+        active = patientController.getMyActiveAppointments();
+        listModel.addAll(active.stream()
+                .map(a -> "Date: "+sdf.format(a.getDate())+"\t\t Time: "+a.getTimeSlot()).toList());
+        lstActiveAppointments.setModel(listModel);
+
+        
+        // Populating active appointments
+        DefaultListModel<String> listModel1 = new DefaultListModel<>();
+        past = patientController.getMyPastAppointments();
+        listModel1.addAll(past.stream()
+                .map(a -> "Date: "+sdf.format(a.getDate())+"\t\t Time: "+a.getTimeSlot()).toList());
+        lstPastAppointments.setModel(listModel1);
     }
 
     /**
@@ -32,11 +64,19 @@ public class ListAppointmentPage extends javax.swing.JPanel {
         jScrollPane7 = new javax.swing.JScrollPane();
         lstPastAppointments = new javax.swing.JList<>();
         jLabel7 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnViewActive = new javax.swing.JButton();
+        btnViewPast = new javax.swing.JButton();
 
         lstActiveAppointments.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        lstActiveAppointments.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstActiveAppointmentsValueChanged(evt);
+            }
         });
         jScrollPane6.setViewportView(lstActiveAppointments);
 
@@ -53,6 +93,27 @@ public class ListAppointmentPage extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Past Appointments");
 
+        btnBack.setText("← Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnViewActive.setText("View");
+        btnViewActive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActiveActionPerformed(evt);
+            }
+        });
+
+        btnViewPast.setText("View");
+        btnViewPast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewPastActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,29 +121,78 @@ public class ListAppointmentPage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(61, 61, 61)
+                        .addComponent(btnViewActive))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane7)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnViewPast)))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBack)
+                    .addComponent(btnViewActive))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewPast))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        bottomPanel.remove(this);
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.previous(bottomPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void lstActiveAppointmentsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstActiveAppointmentsValueChanged
+        
+    }//GEN-LAST:event_lstActiveAppointmentsValueChanged
+
+    private void btnViewActiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActiveActionPerformed
+        if(lstActiveAppointments.getSelectedIndex() < 0){
+            Utils.showDialog(this, null, "Please Select the Appointment!");
+        }else{
+            Appointment appointment = active.get(lstActiveAppointments.getSelectedIndex());
+            bottomPanel.add(new AppointmentDetailsPage(bottomPanel, appointment, patientController, true));
+            CardLayout cl = (CardLayout) bottomPanel.getLayout();
+            cl.next(bottomPanel);
+        }
+    }//GEN-LAST:event_btnViewActiveActionPerformed
+
+    private void btnViewPastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPastActionPerformed
+        if(lstPastAppointments.getSelectedIndex() < 0){
+            Utils.showDialog(this, null, "Please Select the Appointment!");
+        }else{
+            Appointment appointment = past.get(lstPastAppointments.getSelectedIndex());
+            bottomPanel.add(new AppointmentDetailsPage(bottomPanel, appointment, patientController, false));
+            CardLayout cl = (CardLayout) bottomPanel.getLayout();
+            cl.next(bottomPanel);
+        }
+    }//GEN-LAST:event_btnViewPastActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnViewActive;
+    private javax.swing.JButton btnViewPast;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane6;
