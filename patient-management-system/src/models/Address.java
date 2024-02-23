@@ -16,6 +16,11 @@ public class Address {
     public City getCity() {
         return city;
     }
+
+    @Override
+    public String toString() {
+        return houseName + ", " + city;
+    }
 }
 
 //Commit check

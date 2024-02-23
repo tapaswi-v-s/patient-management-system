@@ -17,4 +17,14 @@ public class Hospital {
     public List<String> getCities() {
         return cities;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCities(List<String> cities) {
+        this.cities = cities;
+    }
+    
+    
 }

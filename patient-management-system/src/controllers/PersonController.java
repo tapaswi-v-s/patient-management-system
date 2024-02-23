@@ -27,7 +27,7 @@ public class PersonController {
     }
 
 
-    public void register(Appointment appointment, Person person){
+    public boolean register(Appointment appointment, Person person){
         this.person = person;
         Data.getInstance().people.add(person);
 
@@ -35,29 +35,40 @@ public class PersonController {
         Data.getInstance().patients.add(person.convertToPatient());
         appointment.setPatient(patient);
 
-        bookAnAppointment(appointment);
+        return bookAnAppointment(appointment);
     }
 
     public List<Hospital> getAllHospitals(){
         return Data.getInstance().hospitals;
     }
 
-    public List<DoctorType> getAllDoctorType(){
-        return List.of(DoctorType.values());
-    }
-
-    public List<Doctor> getAllDoctors(Hospital hospital){
+    public List<Doctor> getAllDoctors(Hospital hospital, DoctorType doctorType){
         List<Doctor> list = new ArrayList<>();
         for (Doctor doctor : Data.getInstance().doctors) {
-            if(doctor.getHospital() == hospital){
-                list.add(doctor);
+            if(doctorType == null){
+                if(doctor.getHospital() == hospital){
+                    list.add(doctor);
+                }
+            }else{
+                if(doctor.getHospital() == hospital && doctor.getType() == doctorType){
+                    list.add(doctor);
+                }
+            }
+        }
+        return list;
+    }
+    
+    public List<Appointment> getAvailableAppointments(Doctor doctor, Date date){
+        List<Appointment> list = new ArrayList<>();
+        for (Appointment a : Data.getInstance().activeAppointments) {
+            if(a.getDoctor() == doctor && a.getPatient() == null){
+                list.add(a);
             }
         }
         return list;
     }
 
     public boolean bookAnAppointment(Appointment appointment){
-
         return Data.getInstance().activeAppointments.add(appointment);
     }
 
