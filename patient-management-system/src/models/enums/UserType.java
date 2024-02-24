@@ -1,8 +1,8 @@
 package models.enums;
 
-public enum Role {
+public enum UserType {
     ADMIN,
-    USER,
+    VISITOR,
     DOCTOR,
     PATIENT
 }

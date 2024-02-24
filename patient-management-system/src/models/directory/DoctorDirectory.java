@@ -1,16 +1,11 @@
 package models.directory;
 
 import models.user.Doctor;
-
-import java.util.ArrayList;
-import java.util.List;
+import utils.Data;
 
 public class DoctorDirectory extends Directory<Doctor> {
-    public DoctorDirectory(List<Doctor> doctors) {
-        this.records = doctors;
-    }
 
-    public DoctorDirectory() {
-        this.records = new ArrayList<>();
+    public DoctorDirectory(Doctor doctor) {
+        this.records = Data.getInstance().doctors;
     }
 }

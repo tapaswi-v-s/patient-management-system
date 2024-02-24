@@ -4,6 +4,8 @@
  */
 package views;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author kushp
@@ -15,6 +17,9 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        FirstScreen firstScreen = new FirstScreen(bottomPanel);
+        bottomPanel.add(firstScreen);
     }
 
     /**
@@ -26,17 +31,58 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane2 = new javax.swing.JSplitPane();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        bottomPanel = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        jPanel3.setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Patient Management System");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jLabel1)
+                .addContainerGap(123, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jSplitPane2.setTopComponent(jPanel3);
+
+        bottomPanel.setBackground(new java.awt.Color(0, 51, 102));
+        bottomPanel.setPreferredSize(new java.awt.Dimension(550, 450));
+        bottomPanel.setLayout(new java.awt.CardLayout());
+        jSplitPane2.setRightComponent(bottomPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jSplitPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSplitPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,5 +124,9 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JSplitPane jSplitPane2;
     // End of variables declaration//GEN-END:variables
 }
