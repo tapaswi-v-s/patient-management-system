@@ -107,18 +107,25 @@ public class PatientDetailsPage extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Address:");
 
+        lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setText("jLabel9");
 
+        lblLastName.setForeground(new java.awt.Color(255, 255, 255));
         lblLastName.setText("jLabel10");
 
+        lblBloodGroup.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodGroup.setText("jLabel11");
 
+        lblGender.setForeground(new java.awt.Color(255, 255, 255));
         lblGender.setText("jLabel12");
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("jLabel14");
 
+        lblVitalSign.setForeground(new java.awt.Color(255, 255, 255));
         lblVitalSign.setText("jLabel15");
 
+        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblAddress.setText("jLabel16");
 
         txtNote.setEditable(false);
