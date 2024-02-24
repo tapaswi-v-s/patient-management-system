@@ -1,5 +1,8 @@
 # Hospital Management System
-
+## Group Members<br>
+* __Tapaswi Satyapanthi__
+* __Rachita Shah__
+* __Kush Parmar__<br><br><br>
 __Note:__ To Run this project first add the [jDatePicker.jar](jdatepicker-2.0.3.jar) file to the library after cloning this project.
 
 ## Modules:
