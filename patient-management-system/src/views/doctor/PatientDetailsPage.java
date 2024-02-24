@@ -4,6 +4,11 @@
  */
 package views.doctor;
 
+import controllers.DoctorController;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
+import models.user.Patient;
+
 /**
  *
  * @author HP
@@ -13,8 +18,30 @@ public class PatientDetailsPage extends javax.swing.JPanel {
     /**
      * Creates new form PatientDetailsPage
      */
-    public PatientDetailsPage() {
+    JPanel bottomPanel;
+    DoctorController doctorController;
+    Patient patient;
+    public PatientDetailsPage(JPanel bottomPanel, DoctorController doctorController, Patient patient) {
+        this.bottomPanel = bottomPanel;
+        this.doctorController = doctorController;
+        this.patient = patient;
         initComponents();
+        populateFields();
+    }
+    
+    void populateFields(){
+        lblFirstName.setText(patient.getfName());
+        lblLastName.setText(patient.getlName());
+        lblBloodGroup.setText(patient.getBloodGroup());
+        lblGender.setText(patient.getGender().name());
+        txtNote.setText(""+patient.getNote() == null 
+                ? "N/A" 
+                : patient.getNote());
+        lblAge.setText(""+patient.getAge());
+        lblVitalSign.setText(""+patient.getVitalSign() == null 
+                ? "N/A" 
+                : patient.getVitalSign().name());
+        lblAddress.setText(""+patient.getAddress());
     }
 
     /**
@@ -44,43 +71,61 @@ public class PatientDetailsPage extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         txtNote = new javax.swing.JTextArea();
         jLabel13 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(0, 51, 102));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("FirstName:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("LastName:");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("BloodGroup:");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Gender:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Note:");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Age:");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("VitalSign:");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Address:");
 
+        lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setText("jLabel9");
 
+        lblLastName.setForeground(new java.awt.Color(255, 255, 255));
         lblLastName.setText("jLabel10");
 
+        lblBloodGroup.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodGroup.setText("jLabel11");
 
+        lblGender.setForeground(new java.awt.Color(255, 255, 255));
         lblGender.setText("jLabel12");
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("jLabel14");
 
+        lblVitalSign.setForeground(new java.awt.Color(255, 255, 255));
         lblVitalSign.setText("jLabel15");
 
+        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblAddress.setText("jLabel16");
 
         txtNote.setEditable(false);
@@ -89,7 +134,15 @@ public class PatientDetailsPage extends javax.swing.JPanel {
         jScrollPane1.setViewportView(txtNote);
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Patient Details");
+
+        btnBack.setText("← Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -118,7 +171,9 @@ public class PatientDetailsPage extends javax.swing.JPanel {
                     .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(186, 186, 186))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(81, 81, 81)
+                .addComponent(btnBack)
+                .addGap(58, 58, 58)
                 .addComponent(jLabel13)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -126,49 +181,54 @@ public class PatientDetailsPage extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(btnBack))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblFirstName))
-                .addGap(27, 27, 27)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblLastName))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblBloodGroup))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(lblGender))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(lblAge))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(lblVitalSign))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel8)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(lblAddress)
-                        .addGap(17, 17, 17))))
+                    .addComponent(jLabel8)
+                    .addComponent(lblAddress, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        bottomPanel.remove(this);
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.previous(bottomPanel);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;

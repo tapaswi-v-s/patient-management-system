@@ -71,17 +71,24 @@ public class PatientAppointmentPage extends javax.swing.JPanel {
         drpTimeSlot = new javax.swing.JComboBox<>();
         btnBook = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtDate = new com.toedter.calendar.JDateChooser();
         btnBack = new javax.swing.JButton();
+        txtDate = new com.toedter.calendar.JDateChooser();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Hospital :");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Doctor Category :");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Doctor :");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Date :");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Time Slot :");
 
         drpHospital.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Humber River Hospital", "Mount Sinai Hospital", "North York General Hospital", "Michael Garron Hospital", "The Scarborough Hospital" }));
@@ -115,14 +122,9 @@ public class PatientAppointmentPage extends javax.swing.JPanel {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Patient Appointment Page");
-
-        txtDate.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtDateChanged(evt);
-            }
-        });
 
         btnBack.setText("← Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {

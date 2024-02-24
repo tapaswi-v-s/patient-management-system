@@ -93,6 +93,8 @@ public class EditAppointment extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
         btnBack.setText("← Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,46 +103,64 @@ public class EditAppointment extends javax.swing.JPanel {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Appointments Details");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Doctor Details");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Doctor");
 
+        lblDocName.setForeground(new java.awt.Color(255, 255, 255));
         lblDocName.setText("jLabel3");
 
+        lblDocType.setForeground(new java.awt.Color(255, 255, 255));
         lblDocType.setText("jLabel3");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Type");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Hospital");
 
+        lblHospital.setForeground(new java.awt.Color(255, 255, 255));
         lblHospital.setText("jLabel3");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Patient Details");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Patient");
 
+        lblPName.setForeground(new java.awt.Color(255, 255, 255));
         lblPName.setText("jLabel3");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Blood Group");
 
+        lblbloodGroup.setForeground(new java.awt.Color(255, 255, 255));
         lblbloodGroup.setText("jLabel3");
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("jLabel3");
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Age");
 
         drpStartTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM" }));
 
         drpEndTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM", "1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM" }));
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Date");
 
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Start Time");
 
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("End Time");
 
         btnSubmit.setText("Submit");
@@ -174,7 +194,7 @@ public class EditAppointment extends javax.swing.JPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblDocName, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jLabel1))
-                                .addGap(36, 36, 36)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)

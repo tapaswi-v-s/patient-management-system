@@ -57,7 +57,10 @@ public class HospitalsScreen extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnRefresh = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Hospitals");
 
         lstHospitals.setModel(new javax.swing.AbstractListModel<String>() {

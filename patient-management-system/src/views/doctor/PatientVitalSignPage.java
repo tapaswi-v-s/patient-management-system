@@ -4,6 +4,17 @@
  */
 package views.doctor;
 
+import controllers.DoctorController;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JPanel;
+import models.Appointment;
+import models.enums.VitalSign;
+import models.user.Patient;
+import utils.StringUtils;
+import utils.Utils;
+
 /**
  *
  * @author HP
@@ -13,9 +24,34 @@ public class PatientVitalSignPage extends javax.swing.JPanel {
     /**
      * Creates new form PatientVitalSignPage
      */
-    public PatientVitalSignPage() {
+   
+    JPanel bottomPanel;
+    DoctorController doctorController;
+    Appointment appointment;
+    List<VitalSign> vitalSigns;
+    public PatientVitalSignPage(JPanel bottomPanel, DoctorController doctorController, Appointment appointment) {
+        this.bottomPanel = bottomPanel;
+        this.doctorController = doctorController;
+        this.appointment = appointment;
         initComponents();
+        populateFields();
     }
+
+    void populateFields(){
+        lblFirstName.setText(appointment.getPatient().getfName());
+        lblLastName.setText(appointment.getPatient().getlName());
+        lblBloodGroup.setText(appointment.getPatient().getBloodGroup());
+        lblGender.setText(appointment.getPatient().getGender().name());
+        lblAge.setText(""+appointment.getPatient().getAge());
+        lblAddress.setText(appointment.getPatient().getAddress().toString());
+        
+        vitalSigns = StringUtils.getVitalSigns();
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addAll(vitalSigns.stream().map(Enum::name).toList());
+        drpVitalSign.setModel(model);
+        drpVitalSign.setSelectedIndex((drpVitalSign.getItemCount() > 0) ? 0 : -1);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -44,54 +80,82 @@ public class PatientVitalSignPage extends javax.swing.JPanel {
         lblAge = new javax.swing.JLabel();
         lblAddress = new javax.swing.JLabel();
         btnSubmit = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 51, 102));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("FirstName:");
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("LastName");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("BloodGroup:");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Gender:");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Note:");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Age:");
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("VitalSign:");
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Address:");
 
         txtNote.setColumns(20);
         txtNote.setRows(5);
         jScrollPane1.setViewportView(txtNote);
 
-        drpVitalSign.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BODY_TEMPERATURE", "HEART_RATE", "RESPIRATION_RATE", "BLOOD_PRESSURE", "BLOOD_OXYGEN" }));
         drpVitalSign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 drpVitalSignActionPerformed(evt);
             }
         });
 
+        lblFirstName.setForeground(new java.awt.Color(255, 255, 255));
         lblFirstName.setText("jLabel9");
 
+        lblLastName.setForeground(new java.awt.Color(255, 255, 255));
         lblLastName.setText("jLabel10");
 
+        lblBloodGroup.setForeground(new java.awt.Color(255, 255, 255));
         lblBloodGroup.setText("jLabel11");
 
+        lblGender.setForeground(new java.awt.Color(255, 255, 255));
         lblGender.setText("jLabel12");
 
+        lblAge.setForeground(new java.awt.Color(255, 255, 255));
         lblAge.setText("jLabel13");
 
+        lblAddress.setForeground(new java.awt.Color(255, 255, 255));
         lblAddress.setText("jLabel14");
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("← Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(145, Short.MAX_VALUE)
+                .addContainerGap(173, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -111,54 +175,56 @@ public class PatientVitalSignPage extends javax.swing.JPanel {
                     .addComponent(lblGender, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblAge, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(145, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(212, 212, 212)
                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(8, 8, 8)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(lblFirstName))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(lblLastName))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(lblBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblGender))
-                .addGap(26, 26, 26)
+                    .addComponent(lblGender)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAge)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAge)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(drpVitalSign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(lblAddress))
-                .addGap(32, 32, 32)
+                    .addComponent(lblAddress)
+                    .addComponent(jLabel8))
+                .addGap(30, 30, 30)
                 .addComponent(btnSubmit)
-                .addGap(25, 25, 25))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -166,10 +232,33 @@ public class PatientVitalSignPage extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_drpVitalSignActionPerformed
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        boolean response = doctorController.examinePatient(
+                vitalSigns.get(drpVitalSign.getSelectedIndex()),
+                txtNote.getText(),
+                appointment);
+        
+        if(response){
+            Utils.showDialog(this, "Details Saved Successfully...",
+                    null);
+        }else{
+            Utils.showDialog(this, null,
+                    "Something Went Wrong :(");
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        bottomPanel.remove(this);
+        CardLayout cl = (CardLayout) bottomPanel.getLayout();
+        cl.previous(bottomPanel);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> drpVitalSign;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
